@@ -1,6 +1,6 @@
 module.exports = {
-  title: "web3-cmt.js",
-  base: "/web3-cmt.js/",
+  title: "web3-ss.js",
+  base: "/web3-ss.js/",
   themeConfig: {
     nav: [
       {
@@ -16,16 +16,15 @@ module.exports = {
         collapsable: false,
         children: [
           ["api/", "web3"],
-          "api/cmt",
+          "api/ss",
           "api/validator",
-          "api/delegator",
           "api/governance"
         ]
       }
     ],
     sidebarDepth: 1,
 
-    repo: "CyberMiles/web3-cmt.js",
+    repo: "SecondState/web3-ss.js",
     repoLabel: "GitHub"
   }
 }

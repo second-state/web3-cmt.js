@@ -1,99 +1,22 @@
-# web3.cmt.governance
+# web3.ss.governance
 
-The `web3.cmt.governance` module allows validators to vote on changes to the system state.
-
----
-
-## proposeRecoverFund
-
-```js
-web3.cmt.governance.proposeRecoverFund(recoverFundObject [, callback])
-```
-
-Propose a fund recovery proposal. JSON RPC method: [cmt_proposeTransferFund](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-proposetransferfund).
-
-### Parameters
-
-- `recoverFundObject`: `Object` - The fund recovery proposal object.
-
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
-  - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
-  - `transferFrom`: `String` - From account address.
-  - `transferTo`: `String` - To account address.
-  - `amount`: `String` - Amount of CMTs in Wei.
-  - `reason`: `String` - (optional) Reason.
-  - `expireBlockHeight`: `Number` - (optional) Expiration block height.
-  - `expireTimestamp`: `Number` - (optional) Timestamp when the proposal will expire.
-
-  _Note: You can specify expiration block height **or** timestamp, but not both. If none is specified, a default of 7 days, as measured in block height(`7 * 24 * 60 * 60 / 10`), will be used._
-
-- `callback`: `Function` - (optional) If you pass a callback the HTTP request is made asynchronous. See [this note](https://github.com/ethereum/wiki/wiki/JavaScript-API#using-callbacks) for details.
-
-### Returns
-
-- `Object` - Result object.
-
-  - `height`: `Number` - The block number where the transaction is in. =0 if failed.
-  - `hash`: `String` - Hash of the transaction.
-  - `check_tx`: `Object` - CheckTx result. Contains error code and log if failed.
-  - `deliver_tx`: `Object` - DeliverTx result. Contains error code and log if failed. If successful, the `ProposalID` will be set in the `data` property, for validators to vote later.
-
-### Example
-
-```js
-var payload = {
-  from: "0x7eff122b94897ea5b0e2a9abf47b86337fafebdc",
-  transferFrom: "0xc4abd0339eb8d57087278718986382264244252f",
-  transferTo: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
-  amount: web3.toWei(1000, "cmt")
-}
-web3.cmt.governance.proposeRecoverFund(payload, (err, res) => {
-  if (!err) {
-    console.log(res)
-    /*
-    {
-      check_tx: { fee: {} },
-      deliver_tx: {
-        data: 'JTUx+ODH0/OSdgfC0Sn66qjn2tX8LfvbiwnArzNpIus=',
-        gasUsed": '2000000',
-        fee: {
-            key: 'R2FzRmVl',
-            value: "4000000000000000'
-        }
-      },
-      hash: '95A004438F89E809657EB119ACBDB42A33725B39',
-      height: 561
-    }
-    */
-  } else {
-    console.log(err)
-    /*
-    {
-      check_tx: { code: 20, log: 'Insufficient balance', fee: {} },
-      deliver_tx: { fee: {} },
-      hash: '9D9287A0A5876C8C40A06483DA8885581C073064',
-      height: 0
-    }
-    */
-  }
-})
-```
+The `web3.ss.governance` module allows validators to vote on changes to the system state.
 
 ---
 
 ## proposeChangeParam
 
 ```js
-web3.cmt.governance.proposeChangeParam(changeParamObject [, callback])
+web3.ss.governance.proposeChangeParam(changeParamObject [, callback])
 ```
 
-Propose a system parameter change. JSON RPC method: [cmt_proposeChangeParam](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-proposechangeparam).
+Propose a system parameter change. JSON RPC method: [ss_proposeChangeParam].
 
 ### Parameters
 
 - `changeParamObject`: `Object` - The system parameter change proposal object.
 
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
+  - `from`: `String` - The address for the sending account. Uses the `web3.ss.defaultAccount` property, if not specified. Must be a validator.
   - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
   - `name`: `String` - The name of the parameter.
   - `value`: `String` - New value of the parameter.
@@ -122,7 +45,7 @@ var payload = {
   name: "gas_price",
   value: "3000000000"
 }
-web3.cmt.governance.proposeChangeParam(payload, (err, res) => {
+web3.ss.governance.proposeChangeParam(payload, (err, res) => {
   if (!err) {
     console.log(res)
     /*
@@ -159,16 +82,16 @@ web3.cmt.governance.proposeChangeParam(payload, (err, res) => {
 ## proposeDeployLibEni
 
 ```js
-web3.cmt.governance.proposeDeployLibEni(deployLibEniObject [, callback])
+web3.ss.governance.proposeDeployLibEni(deployLibEniObject [, callback])
 ```
 
-Propose a new library for ENI. JSON RPC method: [cmt_proposeDeployLibEni](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-proposedeploylibeni).
+Propose a new library for ENI. JSON RPC method: [ss_proposeDeployLibEni].
 
 ### Parameters
 
 - `deployLibEniObject`: `Object` - The new ENI library proposal object.
 
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
+  - `from`: `String` - The address for the sending account. Uses the `web3.ss.defaultAccount` property, if not specified. Must be a validator.
   - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
   - `name`: `String` - The name of the library.
   - `version`: `String` - Version of the library, data format: vX.Y.Z, where X, Y, and Z are non-negative integers.
@@ -199,13 +122,13 @@ var payload = {
   name: "reverse",
   version: "v1.0.0",
   fileUrl:
-    '{"ubuntu": ["https://libeni.cybermiles.io/libs/reverse/eni_reverse_1.2.0_ubuntu16.04.so", "http://45.77.171.204/eni_reverse_ubuntu16.04.so"], \
-      "centos": ["https://libeni.cybermiles.io/libs/reverse/eni_reverse_1.2.0_centos7.so", "http://45.77.171.204/eni_reverse_centos7.so"]}',
+    '{"ubuntu": ["https://libeni.secondstate.io/libs/reverse/eni_reverse_1.2.0_ubuntu16.04.so", "http://45.77.171.204/eni_reverse_ubuntu16.04.so"], \
+      "centos": ["https://libeni.secondstate.io/libs/reverse/eni_reverse_1.2.0_centos7.so", "http://45.77.171.204/eni_reverse_centos7.so"]}',
   md5:
     '{"ubuntu": "b440ff88be3fb2d47da4f5b34577d92477bb7f01b52d9d3a09557ea83c97a696211453ff75fb3446b1e99e1a520df2d6539b47bc5151f2689598ecbba23e906d", \
       "centos": "04ae4cd328bd550aae2c18f9fb2945ab849ec763a075f2d6e6010a676dba526082233722827d684a0de733c48b7faa2846094026657d42c3bf360a313c7b0851"}'
 }
-web3.cmt.governance.proposeDeployLibEni(payload, (err, res) => {
+web3.ss.governance.proposeDeployLibEni(payload, (err, res) => {
   if (!err) {
     console.log(res)
     /*
@@ -242,16 +165,16 @@ web3.cmt.governance.proposeDeployLibEni(payload, (err, res) => {
 ## proposeRetireProgram
 
 ```js
-web3.cmt.governance.proposeRetireProgram(retireProgramObject [, callback])
+web3.ss.governance.proposeRetireProgram(retireProgramObject [, callback])
 ```
 
-Propose to retire the program. JSON RPC method: [cmt_proposeRetireProgram](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-proposeretireprogram).
+Propose to retire the program. JSON RPC method: [ss_proposeRetireProgram].
 
 ### Parameters
 
 - `retireProgramObject`: `Object` - The program retire proposal object.
 
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
+  - `from`: `String` - The address for the sending account. Uses the `web3.ss.defaultAccount` property, if not specified. Must be a validator.
   - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
   - `preservedValidators`: `String` - A comma seperated validator public key list. Valiators in this list will be preserved, other validators will be deactivated.
   - `reason`: `String` - (optional) Reason.
@@ -277,7 +200,7 @@ var payload = {
     "Esdo0ZN+nHduoi/kNqjdQSNFmNyv2M3Tie/eZeC25gM=,X6qJkoWxW8YkEHquJQM7mZcfpt5r+l8V6C8rbg8dEHQ=",
   reason: "system upgrade"
 }
-web3.cmt.governance.proposeRetireProgram(payload, (err, res) => {
+web3.ss.governance.proposeRetireProgram(payload, (err, res) => {
   if (!err) {
     console.log(res)
     /*
@@ -315,16 +238,16 @@ web3.cmt.governance.proposeRetireProgram(payload, (err, res) => {
 ## proposeUpgradeProgram
 
 ```js
-web3.cmt.governance.proposeUpgradeProgram(upgradeProgramObject [, callback])
+web3.ss.governance.proposeUpgradeProgram(upgradeProgramObject [, callback])
 ```
 
-Propose to upgrade the program. NOT IMPLEMENTED YET. JSON RPC method: [cmt_proposeUpgradeProgram](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-proposeupgradeprogram).
+Propose to upgrade the program. NOT IMPLEMENTED YET. JSON RPC method: [ss_proposeUpgradeProgram].
 
 ### Parameters
 
 - `upgradeProgramObject`: `Object` - The program upgrade proposal object.
 
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
+  - `from`: `String` - The address for the sending account. Uses the `web3.ss.defaultAccount` property, if not specified. Must be a validator.
   - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
   - `name`: `String` - The name of the program.
   - `version`: `String` - Version of the program, data format: vX.Y.Z, where X, Y, and Z are non-negative integers.
@@ -353,7 +276,7 @@ var payload = {
   version: "v1.0.0"
   ...
 }
-web3.cmt.governance.proposeUpgradeProgram(payload, (err, res) => {
+web3.ss.governance.proposeUpgradeProgram(payload, (err, res) => {
   if (!err) {
     console.log(res)
   } else {
@@ -367,10 +290,10 @@ web3.cmt.governance.proposeUpgradeProgram(payload, (err, res) => {
 ## vote
 
 ```js
-web3.cmt.governance.vote(voteObject [, callback])
+web3.ss.governance.vote(voteObject [, callback])
 ```
 
-Vote on proposals of making changes to the system state. JSON RPC method: [cmt_vote](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-vote).
+Vote on proposals of making changes to the system state. JSON RPC method: [ss_vote].
 
 Here are some use cases:
 
@@ -382,7 +305,7 @@ Here are some use cases:
 
 - `voteObject`: `Object` - The vote object.
 
-  - `from`: `String` - The address for the sending account. Uses the `web3.cmt.defaultAccount` property, if not specified. Must be a validator.
+  - `from`: `String` - The address for the sending account. Uses the `web3.ss.defaultAccount` property, if not specified. Must be a validator.
   - `nonce`: `Number` - (optional) The number of transactions made by the sender prior to this one.
   - `proposalId`: `String` - The Proposal ID to vote.
   - `answer`: `String` - Y or N.
@@ -406,7 +329,7 @@ var payload = {
   proposalId: "JTUx+ODH0/OSdgfC0Sn66qjn2tX8LfvbiwnArzNpIus=",
   answer: "Y"
 }
-web3.cmt.governance.vote(payload, (err, res) => {
+web3.ss.governance.vote(payload, (err, res) => {
   if (!err) {
     console.log(res)
     /*
@@ -436,10 +359,10 @@ web3.cmt.governance.vote(payload, (err, res) => {
 ## listProposals
 
 ```js
-web3.cmt.governance.listProposals([callback])
+web3.ss.governance.listProposals([callback])
 ```
 
-Returns a list of all proposals. JSON RPC method: [cmt_queryProposals](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-queryproposals).
+Returns a list of all proposals. JSON RPC method: [ss_queryProposals].
 
 ### Parameters
 
@@ -455,7 +378,7 @@ Returns a list of all proposals. JSON RPC method: [cmt_queryProposals](https://t
 ### Example
 
 ```js
-var info = web3.cmt.governance.listProposals()
+var info = web3.ss.governance.listProposals()
 console.log(JSON.stringify(info, null, 2))
 /*
 { 
@@ -506,10 +429,10 @@ console.log(JSON.stringify(info, null, 2))
 ## getParams
 
 ```js
-web3.cmt.governance.getParams([height] [,callback])
+web3.ss.governance.getParams([height] [,callback])
 ```
 
-Returns current settings of system parameters. JSON RPC method: [cmt_queryParams](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-queryparams).
+Returns current settings of system parameters. JSON RPC method: [ss_queryParams].
 
 ### Parameters
 
@@ -526,7 +449,7 @@ Returns current settings of system parameters. JSON RPC method: [cmt_queryParams
 ### Example
 
 ```js
-var info = web3.cmt.governance.getParams()
+var info = web3.ss.governance.getParams()
 console.log(JSON.stringify(info, null, 2))
 /*
 {

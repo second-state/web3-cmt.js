@@ -18,20 +18,12 @@ var inputStakeTxFormatter = function(options) {
   }
 
   // address format
-  ;["validatorAddress", "candidateAddress", "transferFrom", "transferTo"]
+  ;["validatorAddress", "candidateAddress"]
     .filter(function(key) {
       return options[key] !== undefined
     })
     .forEach(function(key) {
       options[key] = formatters.inputAddressFormatter(options[key])
-    })
-  // amount format
-  ;["amount", "maxAmount"]
-    .filter(function(key) {
-      return options[key] !== undefined
-    })
-    .forEach(function(key) {
-      options[key] = utils.fromDecimal(options[key])
     })
 
   return options

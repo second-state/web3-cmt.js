@@ -1,13 +1,13 @@
 # web3
 
-[web3-cmt.js](https://github.com/CyberMiles/web3-cmt.js) is a javascript library for interacting with CyberMiles. Its API is derived from the Ethereum [Web3.js](https://github.com/ethereum/wiki/wiki/JavaScript-API), and extends with support for other modules like staking and governance.
+[web3-ss.js](https://github.com/second-state/web3-ss.js) is a javascript library for interacting with SecondState blockchain. Its API is derived from the Ethereum [Web3.js](https://github.com/ethereum/wiki/wiki/JavaScript-API), and extends with support for other modules like staking and governance.
 
 The `web3` object provides all methods, it's fully compatible with Ethereum's [web3](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3).
 
 ## Example
 
 ```js
-var Web3 = require("web3-cmt")
+var Web3 = require("web3-ss")
 
 // Create an instance of web3 using the HTTP provider.
 var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
@@ -16,7 +16,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
 ### Example using HTTP Basic Authentication
 
 ```js
-var Web3 = require("web3-cmt")
+var Web3 = require("web3-ss")
 
 // HttpProvider takes 4 arguments (host, timeout, user, password).
 var web3 = new Web3(

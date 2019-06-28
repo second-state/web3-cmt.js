@@ -37,12 +37,6 @@ var methods = function() {
     params: 1,
     inputFormatter: [formatters.inputStakeTxFormatter]
   })
-  var verify = new Method({
-    name: "verify",
-    call: "cmt_verifyCandidacy",
-    params: 1,
-    inputFormatter: [formatters.inputStakeTxFormatter]
-  })
   var activate = new Method({
     name: "activate",
     call: "cmt_activateCandidacy",
@@ -67,12 +61,6 @@ var methods = function() {
     params: 1,
     inputFormatter: [formatters.inputStakeTxFormatter]
   })
-  var setCompRate = new Method({
-    name: "setCompRate",
-    call: "cmt_setCompRate",
-    params: 1,
-    inputFormatter: [formatters.inputStakeTxFormatter]
-  })
 
   var list = new Method({
     name: "list",
@@ -86,26 +74,17 @@ var methods = function() {
     params: 2,
     inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultHeightFormatter]
   })
-  var queryAwardInfos = new Method({
-    name: "queryAwardInfos",
-    call: "cmt_queryAwardInfos",
-    params: 1,
-    inputFormatter: [formatters.inputDefaultHeightFormatter]
-  })
 
   return [
     declare,
     withdraw,
     update,
-    verify,
     activate,
     deactivate,
-    setCompRate,
     updateAccount,
     acceptAccountUpdate,
     list,
     query,
-    queryAwardInfos
   ]
 }
 

@@ -5,7 +5,7 @@ next: ./api/
 
 # Quickstart
 
-[![Build Status](https://travis-ci.org/CyberMiles/web3-cmt.js.svg?branch=master)](https://travis-ci.org/CyberMiles/web3-cmt.js)
+[![Build Status](https://travis-ci.org/second-state/web3-ss.js.svg?branch=master)](https://travis-ci.org/second-state/web3-ss.js)
 
 ## Requirement
 
@@ -15,24 +15,24 @@ next: ./api/
 ## Installation
 
 ```bash
-yarn add web3-cmt  # or npm install web3-cmt
+yarn add web3-ss  # or npm install web3-ss
 ```
 
 ## Package linking (for development only)
 
 ```bash
-# get latest version of web3-cmt.js
-git clone https://github.com/CyberMiles/web3-cmt.js /path_to/web3-cmt.js
-cd /path_to/web3-cmt.js
+# get latest version of web3-ss.js
+git clone https://github.com/second-state/web3-ss.js /path_to/web3-ss.js
+cd /path_to/web3-ss.js
 git checkout master
 yarn install    # (or `npm install`)
 
-# prepare for web3-cmt package linking
+# prepare for web3-ss package linking
 yarn link       # (or `npm link`)
 
 # goes to directory of your project
 cd /path_to/your_project
 
-# link to local version of web3-cmt package
-yarn link "web3-cmt"  # (or `npm link "web3-cmt"`)
+# link to local version of web3-ss package
+yarn link "web3-ss"  # (or `npm link "web3-ss"`)
 ```

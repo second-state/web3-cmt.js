@@ -7,11 +7,11 @@ var Stake = require("./stake.js")
 var Governance = require("./governance.js")
 
 // inherit and extend Eth
-var Cmt = function(web3) {
+var SS = function(web3) {
   // make override properties configurable
   var _defineProperty = Object.defineProperty
   Object.defineProperty = function(obj, prop, descriptor) {
-    if (obj instanceof Cmt && props.indexOf(prop) > -1) {
+    if (obj instanceof SS && props.indexOf(prop) > -1) {
       descriptor.configurable = true
     }
     return _defineProperty(obj, prop, descriptor)
@@ -39,8 +39,8 @@ var Cmt = function(web3) {
   this.governance = new Governance(this)
 }
 
-Cmt.prototype = Object.create(Eth.prototype)
-Cmt.prototype.constructor = Cmt
+SS.prototype = Object.create(Eth.prototype)
+SS.prototype.constructor = SS
 
 var methods = function() {
   var sendRawTx = new Method({
@@ -75,8 +75,8 @@ var methods = function() {
     outputFormatter: utils.toDecimal
   })
 
-  var getCmtBlock = new Method({
-    name: "getCmtBlock",
+  var getSSBlock = new Method({
+    name: "getSSBlock",
     call: "cmt_getBlockByNumber",
     params: 2,
     inputFormatter: [
@@ -87,14 +87,14 @@ var methods = function() {
     ],
     outputFormatter: formatters.outputBlockFormatter
   })
-  var getCmtTransaction = new Method({
-    name: "getCmtTransaction",
+  var getSSTransaction = new Method({
+    name: "getSSTransaction",
     call: "cmt_getTransactionByHash",
     params: 1,
     outputFormatter: formatters.outputTransactionFormatter
   })
-  var getCmtTransactionFromBlock = new Method({
-    name: "getCmtTransactionFromBlock",
+  var getSSTransactionFromBlock = new Method({
+    name: "getSSTransactionFromBlock",
     call: "cmt_getTransactionFromBlock",
     params: 2,
     outputFormatter: formatters.outputTransactionFormatter
@@ -121,9 +121,9 @@ var methods = function() {
     sendTransaction,
     sendTx,
     sendRawTransaction,
-    getCmtBlock,
-    getCmtTransaction,
-    getCmtTransactionFromBlock,
+    getSSBlock,
+    getSSTransaction,
+    getSSTransactionFromBlock,
     decodeRawTxs,
     getTransactionCount,
     getPendingTransactions
@@ -149,4 +149,4 @@ var props = properties().map(function(p) {
   return p.name
 })
 
-module.exports = Cmt
+module.exports = SS

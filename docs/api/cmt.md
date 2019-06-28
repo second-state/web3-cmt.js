@@ -1,37 +1,18 @@
-# web3.cmt
+# web3.ss
 
-The `web3.cmt` contains the CyberMiles blockchain related methods. Refer to Ethereum's [web3.eth](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3eth) for detailed information.
-
-## Example
-
-```js
-// send a transfer transaction
-web3.cmt.sendTransaction(
-  {
-    from: "0xde0B295669a9FD93d5F28D9Ec85E40f4cb697BAe",
-    to: "0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe",
-    value: web3.toWei(100, "cmt")
-  },
-  (err, res) => {
-    // ...
-  }
-)
-
-// get the balance of an address
-var balance = web3.cmt.getBalance("0x11f4d0A3c12e86B4b5F39B213F7E19D048276DAe")
-```
+The `web3.ss` contains the SecondState blockchain related methods. Refer to Ethereum's [web3.eth](https://github.com/ethereum/wiki/wiki/JavaScript-API#web3eth) for detailed information.
 
 ---
 
-## web3.cmt.syncing
+## web3.ss.syncing
 
 ```js
-web3.cmt.syncing
+web3.ss.syncing
 // or async
-web3.cmt.getSyncing(callback(error, result){ ... })
+web3.ss.getSyncing(callback(error, result){ ... })
 ```
 
-This property is read only and returns the sync object. JSON RPC method: [cmt_syncing](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-syncing).
+This property is read only and returns the sync object. JSON RPC method: [ss_syncing].
 
 ### Returns
 
@@ -46,7 +27,7 @@ This property is read only and returns the sync object. JSON RPC method: [cmt_sy
 ### Example
 
 ```js
-var sync = web3.cmt.syncing
+var sync = web3.ss.syncing
 console.log(sync)
 /*
 {
@@ -61,13 +42,13 @@ console.log(sync)
 
 ---
 
-## web3.cmt.getCmtBlock
+## web3.ss.getSSBlock
 
 ```js
-web3.cmt.getCmtBlock(blockNumber [, callback])
+web3.ss.getSSBlock(blockNumber [, callback])
 ```
 
-Returns a block matching the block number. JSON RPC method: [cmt_getBlockByNumber](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-getblockbynumber).
+Returns a block matching the block number. JSON RPC method: [ss_getBlockByNumber].
 
 #### Parameters
 
@@ -81,7 +62,7 @@ Returns a block matching the block number. JSON RPC method: [cmt_getBlockByNumbe
 ### Example
 
 ```js
-var block = web3.cmt.getCmtBlock(78)
+var block = web3.ss.getSSBlock(78)
 console.log(block)
 /*
 {
@@ -151,13 +132,13 @@ console.log(block)
 
 ---
 
-## web3.cmt.getCmtTransaction
+## web3.ss.getSSTransaction
 
 ```js
-web3.cmt.getCmtTransaction(transactionHash [, callback])
+web3.ss.getSSTransaction(transactionHash [, callback])
 ```
 
-Returns a transaction matching the given transaction hash. JSON RPC method: [cmt_getTransactionByHash](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-gettransactionbyhash).
+Returns a transaction matching the given transaction hash. JSON RPC method: [ss_getTransactionByHash].
 
 #### Parameters
 
@@ -172,13 +153,13 @@ Returns a transaction matching the given transaction hash. JSON RPC method: [cmt
 
 ```js
 // eth compatible transaction
-var transaction = web3.cmt.getCmtTransaction("A3C6073BE1BE0E52B1333F467CF2FD23E96028C5")
+var transaction = web3.ss.getSSTransaction("A3C6073BE1BE0E52B1333F467CF2FD23E96028C5")
 console.log(transaction)
 /*
 {
   blockNumber: 78,
-  cmtHash: "A3C6073BE1BE0E52B1333F467CF2FD23E96028C5",
-  cmtInput: null,
+  ssHash: "A3C6073BE1BE0E52B1333F467CF2FD23E96028C5",
+  ssInput: null,
   from: "0x7eff122b94897ea5b0e2a9abf47b86337fafebdc",
   gas: 90000,
   gasPrice: 2000000000,
@@ -197,21 +178,21 @@ console.log(transaction)
 }
 */
 
-// cmt transaction
-var transaction = web3.cmt.getCmtTransaction("E577068933111104EB5FA7927648A231FFFB96C6")
+// ss transaction
+var transaction = web3.ss.getSSTransaction("E577068933111104EB5FA7927648A231FFFB96C6")
 console.log(transaction)
 /*
 {
   blockNumber: 7086,
-  cmtHash: "E577068933111104EB5FA7927648A231FFFB96C6",
-  cmtInput: {
+  ssHash: "E577068933111104EB5FA7927648A231FFFB96C6",
+  ssInput: {
     data: {
       description: {
-        email: "aaron@wespoke.com",
+        email: "sample@secondstate.io",
         location: "CN,ASIA",
-        name: "Aaron",
+        name: "Sample",
         profile: "Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget tortor risus.",
-        website: "https://cube-api-test.cybermiles.io"
+        website: "https://sample.secondstate.io"
       },
       max_amount: ""
     },
@@ -242,13 +223,13 @@ console.log(transaction)
 
 ---
 
-## web3.cmt.getCmtTransactionFromBlock
+## web3.ss.getSSTransactionFromBlock
 
 ```js
-web3.cmt.getCmtTransactionFromBlock(blockNumber, indexNumber [, callback])
+web3.ss.getSSTransactionFromBlock(blockNumber, indexNumber [, callback])
 ```
 
-Returns a transaction based on a block hash or number and the transactions index position. JSON RPC method: [cmt_getTransactionFromBlock](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-gettransactionfromblock).
+Returns a transaction based on a block hash or number and the transactions index position. JSON RPC method: [ss_getTransactionFromBlock].
 
 #### Parameters
 
@@ -264,13 +245,13 @@ Returns a transaction based on a block hash or number and the transactions index
 
 ```js
 // eth compatible transaction
-var transaction = web3.cmt.getCmtTransactionFromBlock(78, 0)
+var transaction = web3.ss.getSSTransactionFromBlock(78, 0)
 console.log(transaction)
 /*
 {
   blockNumber: 78,
-  cmtHash: "A3C6073BE1BE0E52B1333F467CF2FD23E96028C5",
-  cmtInput: null,
+  ssHash: "A3C6073BE1BE0E52B1333F467CF2FD23E96028C5",
+  ssInput: null,
   from: "0x7eff122b94897ea5b0e2a9abf47b86337fafebdc",
   gas: 90000,
   gasPrice: 2000000000,
@@ -289,21 +270,21 @@ console.log(transaction)
 }
 */
 
-// cmt transaction
-var transaction = web3.cmt.getCmtTransactionFromBlock(7086, 0)
+// ss transaction
+var transaction = web3.ss.getSSTransactionFromBlock(7086, 0)
 console.log(transaction)
 /*
 {
   blockNumber: 7086,
-  cmtHash: "E577068933111104EB5FA7927648A231FFFB96C6",
-  cmtInput: {
+  ssHash: "E577068933111104EB5FA7927648A231FFFB96C6",
+  ssInput: {
     data: {
       description: {
-        email: "aaron@wespoke.com",
+        email: "sample@secondstate.io",
         location: "CN,ASIA",
-        name: "Aaron",
+        name: "Sample",
         profile: "Donec rutrum congue leo eget malesuada. Donec rutrum congue leo eget malesuada. Nulla quis lorem ut libero malesuada feugiat. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eget tortor risus.",
-        website: "https://cube-api-test.cybermiles.io"
+        website: "https://sample.secondstate.io"
       },
       max_amount: ""
     },
@@ -334,15 +315,15 @@ console.log(transaction)
 
 ---
 
-## web3.cmt.pendingTransactionCount
+## web3.ss.pendingTransactionCount
 
 ```js
-web3.cmt.pendingTransactionCount
+web3.ss.pendingTransactionCount
 // or async
-web3.cmt.getPendingTransactionCount(callback(error, result){ ... })
+web3.ss.getPendingTransactionCount(callback(error, result){ ... })
 ```
 
-This property is read only and returns the number of unconfirmed transactions in the mempool. JSON RPC method: [cmt_pendingTransactionCount](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-pendingTransactionCount).
+This property is read only and returns the number of unconfirmed transactions in the mempool. JSON RPC method: [ss_pendingTransactionCount].
 
 ### Returns
 
@@ -351,7 +332,7 @@ This property is read only and returns the number of unconfirmed transactions in
 ### Example
 
 ```js
-var count = web3.cmt.pendingTransactionCount
+var count = web3.ss.pendingTransactionCount
 console.log(count)
 /*
 1
@@ -360,13 +341,13 @@ console.log(count)
 
 ---
 
-## web3.cmt.getPendingTransactions
+## web3.ss.getPendingTransactions
 
 ```js
-web3.cmt.getPendingTransactions([limit], [callback])
+web3.ss.getPendingTransactions([limit], [callback])
 ```
 
-Get unconfirmed transactions in the mempool. JSON RPC method: [cmt_getPendingTransactions](https://travis.readthedocs.io/en/latest/json-rpc.html#cmt-getPendingTransactions).
+Get unconfirmed transactions in the mempool. JSON RPC method: [ss_getPendingTransactions].
 
 #### Parameters
 
@@ -380,7 +361,7 @@ Get unconfirmed transactions in the mempool. JSON RPC method: [cmt_getPendingTra
 ### Example
 
 ```js
-var txs = web3.cmt.getPendingTransactions()
+var txs = web3.ss.getPendingTransactions()
 console.log(JSON.stringify(txs, null, 2))
 /*
 [
@@ -390,9 +371,9 @@ console.log(JSON.stringify(txs, null, 2))
     "gas": 90000,
     "gasPrice": "0",
     "hash": "0x1d58d5d58f9432b52bab593da7d83e3fa2aaf309879ac7693744f3bbaf90aa46",
-    "cmtHash": "",
+    "ssHash": "",
     "input": "0x",
-    "cmtInput": null,
+    "ssInput": null,
     "nonce": 10,
     "to": "0x38d7b32e7b5056b297baf1a1e950abbaa19ce948",
     "transactionIndex": 0,
