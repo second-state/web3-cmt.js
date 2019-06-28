@@ -16,7 +16,7 @@ deploy:
     on:
       branch: master
   - provider: npm
-    email: maggie@5milesapp.com
+    email: wangshishuo@gmail.com
     api_key: $NPM_TOKEN
     on:
       tags: true
